@@ -18,25 +18,25 @@ package org.seasar.remoting.common.connector;
 import java.lang.reflect.Method;
 
 /**
- * �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo�������s����I�u�W�F�N�g����������C���^�t�F�[�X�ł��B
- * �����N���X�͌ŗL�̕��@(�v���g�R��)�Ń����[�g�I�u�W�F�N�g�̃��\�b�h���Ăяo���܂��B
+ * リモートオブジェクトに対するメソッド呼び出しを実行するオブジェクトが実装するインタフェースです。
+ * 実装クラスは固有の方法(プロトコル)でリモートオブジェクトのメソッドを呼び出します。
  * 
  * @author koichik
  */
 public interface Connector {
 
     /**
-     * �����[�g���\�b�h�Ăяo�������s���A���̌��ʂ�Ԃ��܂��B
+     * リモートメソッド呼び出しを実行し、その結果を返します。
      * 
      * @param name
-     *            �����[�g�I�u�W�F�N�g�̖��O
+     *            リモートオブジェクトの名前
      * @param method
-     *            �Ăяo�����\�b�h
+     *            呼び出すメソッド
      * @param args
-     *            �����[�g�I�u�W�F�N�g�̃��\�b�h�Ăяo���ɓn���������l���i�[����I�u�W�F�N�g�z��
-     * @return �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������̖߂�l
+     *            リモートオブジェクトのメソッド呼び出しに渡される引数値を格納するオブジェクト配列
+     * @return リモートオブジェクトに対するメソッド呼び出しからの戻り値
      * @throws Throwable
-     *             �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������X���[������O
+     *             リモートオブジェクトに対するメソッド呼び出しからスローされる例外
      */
     Object invoke(String name, Method method, Object[] args) throws Throwable;
 }

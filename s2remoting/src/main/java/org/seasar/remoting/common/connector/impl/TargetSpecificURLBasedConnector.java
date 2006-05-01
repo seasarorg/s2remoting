@@ -22,46 +22,46 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * �^�[�Q�b�g�ƂȂ�I�u�W�F�N�g���ƂɌʂ�URL���g�p���ă����[�g���\�b�h�Ăяo�����s���R�l�N�^�̒��ۊ��N���X�ł��B
+ * ターゲットとなるオブジェクトごとに個別のURLを使用してリモートメソッド呼び出しを行うコネクタの抽象基底クラスです。
  * <p>
- * ���̃R�l�N�^�̓����[�g�I�u�W�F�N�g�̖��O���X�[�p�[�N���X�̃v���p�e�B�ɐݒ肳�ꂽ�x�[�XURL����̑���URL�Ƃ��ă^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g��URL���������܂��B
- * ���̂��߁C�x�[�XURL���X���b�V��( <code>/</code> )�ŏI�����Ă��Ȃ��ꍇ�A�\�����Ȃ����ʂɂȂ邩������Ȃ����Ƃɒ��ӂ��Ă��������B
+ * このコネクタはリモートオブジェクトの名前をスーパークラスのプロパティに設定されたベースURLからの相対URLとしてターゲットとなるリモートオブジェクトのURLを解決します。
+ * このため，ベースURLがスラッシュ( <code>/</code> )で終了していない場合、予期しない結果になるかもしれないことに注意してください。
  * <p>
- * ��������܂��B <br>
- * �x�[�XURL�����̂悤�ɐݒ肳��Ă���Ƃ��܂��B
+ * 例を示します。 <br>
+ * ベースURLが次のように設定されているとします。
  * 
  * <pre>
- *    http://host/context/services/
+ *     http://host/context/services/
  * </pre>
  * 
- * �����[�g�I�u�W�F�N�g�����̖��O�ł���Ƃ��܂��B
+ * リモートオブジェクトが次の名前であるとします。
  * 
  * <pre>
  * Foo
  * </pre>
  * 
- * �����[�g�I�u�W�F�N�g��URL�͎��̂悤�ɂȂ�܂��B
+ * リモートオブジェクトのURLは次のようになります。
  * 
  * <pre>
- *    http://host/context/services/Foo
+ *     http://host/context/services/Foo
  * </pre>
  * 
- * �x�[�XURL�����̂悤�ɃX���b�V��( <code>/</code> )�ŏI�����Ă��Ȃ��ꍇ�͌��ʂ��قȂ�܂��B
+ * ベースURLが次のようにスラッシュ( <code>/</code> )で終了していない場合は結果が異なります。
  * 
  * <pre>
- *    http://host/context/services
+ *     http://host/context/services
  * </pre>
  * 
- * �����[�g�I�u�W�F�N�g�����̖��O�ł���Ƃ��܂��B
+ * リモートオブジェクトが次の名前であるとします。
  * 
  * <pre>
  * Foo
  * </pre>
  * 
- * �����[�g�I�u�W�F�N�g��URL�͎��̂悤�ɂȂ�܂��B
+ * リモートオブジェクトのURLは次のようになります。
  * 
  * <pre>
- *    http://host/context/Foo
+ *     http://host/context/Foo
  * </pre>
  * 
  * @author koichik
@@ -70,7 +70,7 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
 
     // constants
     /**
-     * �����[�g�I�u�W�F�N�g��URL���L���b�V���������̃f�t�H���g�l
+     * リモートオブジェクトのURLをキャッシュする上限のデフォルト値
      */
     protected static final int DEFAULT_MAX_CACHED_URLS = 10;
 
@@ -78,27 +78,27 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
     protected LRUMap cachedURLs = new LRUMap(DEFAULT_MAX_CACHED_URLS);
 
     /**
-     * �����[�g�I�u�W�F�N�g��URL���L���b�V����������ݒ肵�܂��B
+     * リモートオブジェクトのURLをキャッシュする上限を設定します。
      * 
      * @param maxCachedURLs
-     *            �����[�g�I�u�W�F�N�g��URL���L���b�V���������ł�
+     *            リモートオブジェクトのURLをキャッシュする上限です
      */
     public synchronized void setMaxCachedURLs(final int maxCachedURLs) {
         cachedURLs.setMaxSize(maxCachedURLs);
     }
 
     /**
-     * �^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g��URL���������A�T�u�N���X�ŗL�̕��@�Ń��\�b�h�Ăяo�������s���܂��B
+     * ターゲットとなるリモートオブジェクトのURLを解決し、サブクラス固有の方法でメソッド呼び出しを実行します。
      * 
      * @param remoteName
-     *            �����[�g�I�u�W�F�N�g�̖��O
+     *            リモートオブジェクトの名前
      * @param method
-     *            �Ăяo�����\�b�h
+     *            呼び出すメソッド
      * @param args
-     *            �����[�g�I�u�W�F�N�g�̃��\�b�h�Ăяo���ɓn���������l���i�[����I�u�W�F�N�g�z��
-     * @return �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������̖߂�l
+     *            リモートオブジェクトのメソッド呼び出しに渡される引数値を格納するオブジェクト配列
+     * @return リモートオブジェクトに対するメソッド呼び出しからの戻り値
      * @throws Throwable
-     *             �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������X���[���ꂽ��O�ł�
+     *             リモートオブジェクトに対するメソッド呼び出しからスローされた例外です
      */
     public Object invoke(final String remoteName, final Method method, final Object[] args)
             throws Throwable {
@@ -106,14 +106,14 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
     }
 
     /**
-     * �^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g��URL��Ԃ��܂��B
-     * �����[�g�I�u�W�F�N�g��URL�́A�����[�g�I�u�W�F�N�g�̖��O���x�[�XURL����̑���URL�Ƃ��ĉ������܂��B
+     * ターゲットとなるリモートオブジェクトのURLを返します。
+     * リモートオブジェクトのURLは、リモートオブジェクトの名前をベースURLからの相対URLとして解決します。
      * 
      * @param remoteName
-     *            �^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g�̖��O
-     * @return �^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g��URL
+     *            ターゲットとなるリモートオブジェクトの名前
+     * @return ターゲットとなるリモートオブジェクトのURL
      * @throws MalformedURLException
-     *             �x�[�XURL�ƃ����[�g�I�u�W�F�N�g�̖��O����URL���쐬�ł��Ȃ������ꍇ�ɃX���[����܂�
+     *             ベースURLとリモートオブジェクトの名前からURLを作成できなかった場合にスローされます
      */
     protected synchronized URL getTargetURL(final String remoteName) throws MalformedURLException {
         URL targetURL = (URL) cachedURLs.get(remoteName);
@@ -125,24 +125,24 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
     }
 
     /**
-     * �T�u�N���X�ŗL�̕��@�Ń����[�g���\�b�h�̌Ăяo�������s���A���̌��ʂ�Ԃ��܂��B
+     * サブクラス固有の方法でリモートメソッドの呼び出しを実行し、その結果を返します。
      * 
      * @param targetURL
-     *            �^�[�Q�b�g�ƂȂ郊���[�g�I�u�W�F�N�g��URL
+     *            ターゲットとなるリモートオブジェクトのURL
      * @param method
-     *            �Ăяo�����\�b�h
+     *            呼び出すメソッド
      * @param args
-     *            �����[�g�I�u�W�F�N�g�̃��\�b�h�Ăяo���ɓn���������l���i�[����I�u�W�F�N�g�z��
-     * @return �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������̖߂�l
+     *            リモートオブジェクトのメソッド呼び出しに渡される引数値を格納するオブジェクト配列
+     * @return リモートオブジェクトに対するメソッド呼び出しからの戻り値
      * @throws Throwable
-     *             �����[�g�I�u�W�F�N�g�ɑ΂��郁�\�b�h�Ăяo������X���[���ꂽ��O�ł�
+     *             リモートオブジェクトに対するメソッド呼び出しからスローされた例外です
      */
     protected abstract Object invoke(URL targetURL, Method method, Object[] args) throws Throwable;
 
     /**
-     * LRU�}�b�v <br>
-     * �G���g�����ɏ��������A����𒴂��ăG���g�����ǉ����ꂽ�ꍇ�ɂ͂����Ƃ��g�p����Ă��Ȃ��G���g������菜�����}�b�v�̎����ł��B
-     * �G���g�����̏���͐������₷���Ƃ��o���܂����A���炵�Ă����̐��܂ŃG���g������菜����邱�Ƃ͂���܂���B ���̃}�b�v�͓�������܂���B
+     * LRUマップ <br>
+     * エントリ数に上限があり、それを超えてエントリが追加された場合にはもっとも使用されていないエントリが取り除かれるマップの実装です。
+     * エントリ数の上限は随時増やすことが出来ますが、減らしてもその数までエントリが取り除かれることはありません。 このマップは同期されません。
      * 
      * @author koichik
      */
@@ -150,33 +150,33 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
 
         private static final long serialVersionUID = 1L;
 
-        /** �f�t�H���g�����e�� */
+        /** デフォルト初期容量 */
         protected static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-        /** �f�t�H���g���׌W�� */
+        /** デフォルト負荷係数 */
         protected static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
         protected int maxSize;
 
         /**
-         * �f�t�H���g�̏����e�ʂƕ��׌W���Ŏw�肳�ꂽ�G���g����������Ƃ���C���X�^���X���\�z���܂��B
+         * デフォルトの初期容量と負荷係数で指定されたエントリ数を上限とするインスタンスを構築します。
          * 
          * @param maxSize
-         *            �G���g�����̍ő吔
+         *            エントリ数の最大数
          */
         public LRUMap(final int maxSize) {
             this(maxSize, DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
         }
 
         /**
-         * �w�肳�ꂽ�����e�ʂƕ��׌W���A�G���g�����̏�������C���X�^���X���\�z���܂��B
+         * 指定された初期容量と負荷係数、エントリ数の上限を持つインスタンスを構築します。
          * 
          * @param maxSize
-         *            �G���g�����̍ő吔
+         *            エントリ数の最大数
          * @param initialCapacity
-         *            �����e��
+         *            初期容量
          * @param loadFactor
-         *            ���׌W��
+         *            負荷係数
          */
         public LRUMap(final int maxSize, final int initialCapacity, final float loadFactor) {
             super(initialCapacity, loadFactor, true);
@@ -184,22 +184,22 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
         }
 
         /**
-         * �G���g�����̍ő�l��ݒ肵�܂��B
+         * エントリ数の最大値を設定します。
          * 
          * @param maxSize
-         *            �G���g�����̍ő吔
+         *            エントリ数の最大数
          */
         public void setMaxSize(final int maxSize) {
             this.maxSize = maxSize;
         }
 
         /**
-         * �}�b�v�̃G���g�������ő吔�𒴂��Ă���ꍇ <code>true</code> ��Ԃ��܂��B
-         * ���̌��ʁA�ł��O�Ƀ}�b�v�ɑ}�����ꂽ�G���g�����}�b�v����폜����܂��B
+         * マップのエントリ数が最大数を超えている場合 <code>true</code> を返します。
+         * その結果、最も前にマップに挿入されたエントリがマップから削除されます。
          * 
          * @param eldest
-         *            �����Ƃ��O�Ƀ}�b�v�ɑ}�����ꂽ�G���g��
-         * @return �}�b�v�̃G���g�������ő吔�𒴂��Ă���ꍇ <code>true</code>
+         *            もっとも前にマップに挿入されたエントリ
+         * @return マップのエントリ数が最大数を超えている場合 <code>true</code>
          */
         protected boolean removeEldestEntry(final Map.Entry eldest) {
             return maxSize > 0 && size() > maxSize;

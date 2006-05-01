@@ -25,18 +25,18 @@ import org.seasar.framework.util.MethodUtil;
 import org.seasar.remoting.common.connector.Connector;
 
 /**
- * �����[�g�I�u�W�F�N�g�̃��\�b�h�Ăяo�����s�����߂̃C���^�[�Z�v�^�ł��B
+ * リモートオブジェクトのメソッド呼び出しを行うためのインターセプタです。
  * <p>
- * ���̃C���^�[�Z�v�^��Java�C���^�t�F�[�X�܂��͒��ۃN���X�ɓK�p����A�Ăяo���ꂽ���\�b�h���^�[�Q�b�g�ɂ���Ď�������Ă��Ȃ��ꍇ(���ۃ��\�b�h)��
- * {@link Connector}�ɈϏ����邱�Ƃɂ�胊���[�g�I�u�W�F�N�g�̃��\�b�h�Ăяo�����s���܂��B
+ * このインターセプタはJavaインタフェースまたは抽象クラスに適用され、呼び出されたメソッドがターゲットによって実装されていない場合(抽象メソッド)に
+ * {@link Connector}に委譲することによりリモートオブジェクトのメソッド呼び出しを行います。
  * <p>
- * �C���^�[�Z�v�^�̓^�[�Q�b�g�̃R���|�[�l���g��`���疼�O( <code>&lt;component&gt;</code> �v�f��
- * <code>name</code> �����̒l)���擾���A���̖��O�������[�g�I�u�W�F�N�g�̖��O�Ƃ��� {@link Connector#invoke}
- * ���Ăяo���܂��B�R���|�[�l���g��`�ɖ��O����`����Ă��Ȃ��ꍇ�́A�R���|�[�l���g�̌^��( <code>&lt;component&gt;</code>
- * �v�f�� <code>class</code> �����̒l)����p�b�P�[�W�������������O�������[�g�I�u�W�F�N�g�̖��O�Ƃ��܂��B
- * �R���|�[�l���g�̌^������`����Ă��Ȃ��ꍇ�́A�^�[�Q�b�g�I�u�W�F�N�g�̃N���X������p�b�P�[�W�������������O�������[�g�I�u�W�F�N�g�̖��O�Ƃ��܂��B
- * �����v���p�e�B <code>remoteName</code>
- * (�I�v�V����)���ݒ肳��Ă���΁A���̒l����Ƀ����[�g�I�u�W�F�N�g�̖��O�Ƃ��Ďg�p����܂��B
+ * インターセプタはターゲットのコンポーネント定義から名前( <code>&lt;component&gt;</code> 要素の
+ * <code>name</code> 属性の値)を取得し、その名前をリモートオブジェクトの名前として {@link Connector#invoke}
+ * を呼び出します。コンポーネント定義に名前が定義されていない場合は、コンポーネントの型名( <code>&lt;component&gt;</code>
+ * 要素の <code>class</code> 属性の値)からパッケージ名を除いた名前をリモートオブジェクトの名前とします。
+ * コンポーネントの型名が定義されていない場合は、ターゲットオブジェクトのクラス名からパッケージ名を除いた名前をリモートオブジェクトの名前とします。
+ * もしプロパティ <code>remoteName</code>
+ * (オプション)が設定されていれば、その値が常にリモートオブジェクトの名前として使用されます。
  * 
  * @see Connector
  * @author koichik
@@ -51,32 +51,32 @@ public class RemotingInterceptor extends AbstractInterceptor {
     protected String remoteName;
 
     /**
-     * �����[�g�Ăяo�������s���� {@link Connector}��ݒ肵�܂��B���̃v���p�e�B�͕K�{�ł��B
+     * リモート呼び出しを実行する {@link Connector}を設定します。このプロパティは必須です。
      * 
      * @param connector
-     *            �����[�g�Ăяo�������s���� {@link Connector}
+     *            リモート呼び出しを実行する {@link Connector}
      */
     public void setConnector(final Connector connector) {
         this.connector = connector;
     }
 
     /**
-     * �����[�g�I�u�W�F�N�g�̖��O��ݒ肵�܂��B���̃v���p�e�B�̓I�v�V�����ł��B
-     * �R���|�[�l���g��`����擾�ł��閼�O���g�����Ƃ��o���Ȃ��ꍇ�ɂ̂ݐݒ肵�Ă��������B
+     * リモートオブジェクトの名前を設定します。このプロパティはオプションです。
+     * コンポーネント定義から取得できる名前を使うことが出来ない場合にのみ設定してください。
      * 
      * @param remoteName
-     *            �����[�g�I�u�W�F�N�g�̖��O
+     *            リモートオブジェクトの名前
      */
     public void setRemoteName(final String remoteName) {
         this.remoteName = remoteName;
     }
 
     /**
-     * �^�[�Q�b�g�̃��\�b�h���N�����ꂽ���ɌĂяo����܂��B�N�����ꂽ���\�b�h�����ۃ��\�b�h�Ȃ� {@link Connector}�ɈϏ����܂��B
-     * ��ۃ��\�b�h�Ȃ�^�[�Q�b�g�̃��\�b�h���Ăяo���܂��B
+     * ターゲットのメソッドが起動された時に呼び出されます。起動されたメソッドが抽象メソッドなら {@link Connector}に委譲します。
+     * 具象メソッドならターゲットのメソッドを呼び出します。
      * 
      * @param invocation
-     *            ���\�b�h�̋N�����
+     *            メソッドの起動情報
      */
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Method method = invocation.getMethod();
@@ -87,17 +87,17 @@ public class RemotingInterceptor extends AbstractInterceptor {
     }
 
     /**
-     * �����[�g�I�u�W�F�N�g�̖��O��Ԃ��܂��B�����[�g�I�u�W�F�N�g�̖��O�͎��̏��ŉ������܂��B
+     * リモートオブジェクトの名前を返します。リモートオブジェクトの名前は次の順で解決します。
      * <ul>
-     * <li>�v���p�e�B <code>remoteName</code> ���ݒ肳��Ă���΂��̒l�B</li>
-     * <li>�R���|�[�l���g��`�ɖ��O���ݒ肳��Ă���΂��̒l�B</li>
-     * <li>�R���|�[�l���g��`�Ɍ^���ݒ肳��Ă���΂��̖��O����p�b�P�[�W�����������l�B</li>
-     * <li>�^�[�Q�b�g�I�u�W�F�N�g�̌^������p�b�P�[�W�����������l�B</li>
+     * <li>プロパティ <code>remoteName</code> が設定されていればその値。</li>
+     * <li>コンポーネント定義に名前が設定されていればその値。</li>
+     * <li>コンポーネント定義に型が設定されていればその名前からパッケージ名を除いた値。</li>
+     * <li>ターゲットオブジェクトの型名からパッケージ名を除いた値。</li>
      * </ul>
      * 
      * @param invocation
-     *            ���\�b�h�̋N�����
-     * @return �����[�g�I�u�W�F�N�g�̖��O
+     *            メソッドの起動情報
+     * @return リモートオブジェクトの名前
      */
     protected String getRemoteName(final MethodInvocation invocation) {
         if (remoteName != null) {

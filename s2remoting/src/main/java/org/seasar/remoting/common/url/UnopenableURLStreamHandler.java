@@ -20,8 +20,8 @@ import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
- * ƒfƒtƒHƒ‹ƒg‚Ìƒ|[ƒg”Ô†‚ğ‚¿AƒI[ƒvƒ“‚·‚é‚±‚Æ‚Ìo—ˆ‚È‚¢ <code>URL</code> ‚Ì‚½‚ß‚Ì
- * <code>URLStreamHandler</code> ‚Å‚·B
+ * ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒãƒ¼ãƒˆç•ªå·ã‚’æŒã¡ã€ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹ã“ã¨ã®å‡ºæ¥ãªã„ <code>URL</code> ã®ãŸã‚ã®
+ * <code>URLStreamHandler</code> ã§ã™ã€‚
  * 
  * @author koichik
  */
@@ -31,47 +31,47 @@ public class UnopenableURLStreamHandler extends URLStreamHandler {
     protected final int defaultPort;
 
     /**
-     * w’è‚³‚ê‚½ƒ|[ƒg”Ô†‚ğƒfƒtƒHƒ‹ƒg‚Æ‚µ‚Ä‚ÂV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸãƒãƒ¼ãƒˆç•ªå·ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¨ã—ã¦æŒã¤æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã—ã¾ã™ã€‚
      * 
      * @param defaultPort
-     *            ‚±‚ÌƒvƒƒgƒRƒ‹‚ÌƒfƒtƒHƒ‹ƒg‚Ìƒ|[ƒg”Ô†
+     *            ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒãƒ¼ãƒˆç•ªå·
      */
     public UnopenableURLStreamHandler(final int defaultPort) {
         this.defaultPort = defaultPort;
     }
 
     /**
-     * ‚±‚Ì‘€ì‚ÍƒTƒ|[ƒg‚³‚ê‚Ü‚¹‚ñB
+     * ã“ã®æ“ä½œã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¾ã›ã‚“ã€‚
      * 
      * @throws UnsupportedOperationException
-     *             í‚ÉƒXƒ[‚³‚ê‚Ü‚·
+     *             å¸¸ã«ã‚¹ãƒ­ãƒ¼ã•ã‚Œã¾ã™
      */
     protected URLConnection openConnection(final URL url) {
         throw new UnsupportedOperationException();
     }
 
     /**
-     * <code>URL</code> ˆø”ƒtƒB[ƒ‹ƒh’l‚ğAw’è‚³‚ê‚½’l‚Éİ’è‚µ‚Ü‚·B <br>
-     * ƒ|[ƒg”Ô†‚ªw’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍAƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Åw’è‚³‚ê‚½ƒfƒtƒHƒ‹ƒg‚Ìƒ|[ƒg”Ô†‚ğİ’è‚µ‚Ü‚·B
+     * <code>URL</code> å¼•æ•°ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å€¤ã‚’ã€æŒ‡å®šã•ã‚ŒãŸå€¤ã«è¨­å®šã—ã¾ã™ã€‚ <br>
+     * ãƒãƒ¼ãƒˆç•ªå·ãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯ã€ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§æŒ‡å®šã•ã‚ŒãŸãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒãƒ¼ãƒˆç•ªå·ã‚’è¨­å®šã—ã¾ã™ã€‚
      * 
      * @param url
-     *            C³‚·‚é <code>URL</code>
+     *            ä¿®æ­£ã™ã‚‹ <code>URL</code>
      * @param protocol
-     *            ƒvƒƒgƒRƒ‹–¼
+     *            ãƒ—ãƒ­ãƒˆã‚³ãƒ«å
      * @param host
-     *            <code>URL</code> ‚ÌƒŠƒ‚[ƒgƒzƒXƒg’l
+     *            <code>URL</code> ã®ãƒªãƒ¢ãƒ¼ãƒˆãƒ›ã‚¹ãƒˆå€¤
      * @param port
-     *            ƒŠƒ‚[ƒgƒ}ƒVƒ“ã‚Ìƒ|[ƒg
+     *            ãƒªãƒ¢ãƒ¼ãƒˆãƒã‚·ãƒ³ä¸Šã®ãƒãƒ¼ãƒˆ
      * @param authority
-     *            <code>URL</code> ‚ÌŒ ŒÀ•”•ª
+     *            <code>URL</code> ã®æ¨©é™éƒ¨åˆ†
      * @param userInfo
-     *            <code>URL</code> ‚Ìƒ†[ƒUî•ñ•”•ª
+     *            <code>URL</code> ã®ãƒ¦ãƒ¼ã‚¶æƒ…å ±éƒ¨åˆ†
      * @param path
-     *            <code>URL</code> ‚ÌƒpƒXƒRƒ“ƒ|[ƒlƒ“ƒg
+     *            <code>URL</code> ã®ãƒ‘ã‚¹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
      * @param query
-     *            <code>URL</code> ‚ÌƒNƒGƒŠ[•”•ª
+     *            <code>URL</code> ã®ã‚¯ã‚¨ãƒªãƒ¼éƒ¨åˆ†
      * @param ref
-     *            QÆ
+     *            å‚ç…§
      */
     protected void setURL(final URL url, final String protocol, final String host, int port,
             final String authority, final String userInfo, final String path, final String query,

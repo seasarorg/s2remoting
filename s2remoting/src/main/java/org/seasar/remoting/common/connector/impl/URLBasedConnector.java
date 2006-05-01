@@ -20,7 +20,7 @@ import java.net.URL;
 import org.seasar.remoting.common.connector.Connector;
 
 /**
- * URL‚ÉŠî‚Ã‚¢‚ÄƒŠƒ‚[ƒgƒƒ\ƒbƒhŒÄ‚Ño‚µ‚ğs‚¤ƒRƒlƒNƒ^‚Ì’ŠÛŠî’êƒNƒ‰ƒX‚Å‚·B
+ * URLã«åŸºã¥ã„ã¦ãƒªãƒ¢ãƒ¼ãƒˆãƒ¡ã‚½ãƒƒãƒ‰å‘¼ã³å‡ºã—ã‚’è¡Œã†ã‚³ãƒã‚¯ã‚¿ã®æŠ½è±¡åŸºåº•ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  * 
  * @author koichik
  */
@@ -30,19 +30,19 @@ public abstract class URLBasedConnector implements Connector {
     protected URL baseURL;
 
     /**
-     * ƒx[ƒXURL‚ğ•Ô‚µ‚Ü‚·B
+     * ãƒ™ãƒ¼ã‚¹URLã‚’è¿”ã—ã¾ã™ã€‚
      * 
-     * @return ƒx[ƒXURL
+     * @return ãƒ™ãƒ¼ã‚¹URL
      */
     public URL getBaseURL() {
         return baseURL;
     }
 
     /**
-     * ƒx[ƒXURL‚ğİ’è‚µ‚Ü‚·B
+     * ãƒ™ãƒ¼ã‚¹URLã‚’è¨­å®šã—ã¾ã™ã€‚
      * 
      * @param baseURL
-     *            ƒx[ƒXURL‚Ì•¶š—ñ‚Å‚·
+     *            ãƒ™ãƒ¼ã‚¹URLã®æ–‡å­—åˆ—ã§ã™
      */
     public void setBaseURL(final URL baseURL) {
         this.baseURL = baseURL;

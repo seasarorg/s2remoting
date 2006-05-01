@@ -22,46 +22,65 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.seasar.framework.log.Logger;
+
 /**
- * <code>URLStreamHandler</code> ‚ÌƒŒƒWƒXƒgƒŠ‚Å‚·B <br>
- * ‚±‚ÌƒŒƒWƒXƒgƒŠ‚Í <code>URLStreamHandlerFactory</code> ‚Å‚ ‚èA <code>URL</code>
- * ƒNƒ‰ƒX‚Éİ’è‚³‚ê‚Ü‚·B {@link #createURLStreamHandler(String)}
- * ‚ªŒÄ‚Ño‚³‚ê‚é‚ÆA“o˜^‚³‚ê‚Ä‚¢‚é <code>URLStreamHandler</code> ‚ğ•Ô‚µ‚Ü‚·B
+ * <code>URLStreamHandler</code> ã®ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã§ã™ã€‚ <br>
+ * ã“ã®ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã¯ <code>URLStreamHandlerFactory</code> ã§ã‚ã‚Šã€ <code>URL</code>
+ * ã‚¯ãƒ©ã‚¹ã«è¨­å®šã•ã‚Œã¾ã™ã€‚ {@link #createURLStreamHandler(String)} ãŒå‘¼ã³å‡ºã•ã‚Œã‚‹ã¨ã€ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹
+ * <code>URLStreamHandler</code> ã‚’è¿”ã—ã¾ã™ã€‚
  * 
  * @author koichik
  */
 public class URLStreamHandlerRegistry implements URLStreamHandlerFactory {
-    protected static final Map registry = Collections.synchronizedMap(new HashMap());
 
-    static {
-        URL.setURLStreamHandlerFactory(new URLStreamHandlerRegistry());
-    }
+    private static final Logger logger = Logger.getLogger(URLStreamHandlerRegistry.class);
+    protected static final Map registry = Collections.synchronizedMap(new HashMap());
+    protected static boolean initialized;
 
     /**
-     * ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚µ‚Ü‚·B
+     * ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã—ã¾ã™ã€‚
      */
     private URLStreamHandlerRegistry() {
     }
 
     /**
-     * w’è‚³‚ê‚½ƒvƒƒgƒRƒ‹‚Ì‚½‚ß‚ÌA <code>URLStreamHandler</code> ‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®ã€ <code>URLStreamHandler</code> ã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã—ã¾ã™ã€‚
      * 
      * @param protocol
-     *            ƒvƒƒgƒRƒ‹ (<code>rmi</code> ‚È‚Ç)
+     *            ãƒ—ãƒ­ãƒˆã‚³ãƒ« (<code>rmi</code> ãªã©)
      */
     public URLStreamHandler createURLStreamHandler(final String protocol) {
         return (URLStreamHandler) registry.get(protocol);
     }
 
     /**
-     * ƒvƒƒgƒRƒ‹‚Ì‚½‚ß‚ÌV‚µ‚¢ <code>URLStreamHandler</code> ‚ğ“o˜^‚µ‚Ü‚·B
+     * ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®æ–°ã—ã„ <code>URLStreamHandler</code> ã‚’ç™»éŒ²ã—ã¾ã™ã€‚
      * 
      * @param protocol
-     *            ƒvƒƒgƒRƒ‹ (<code>rmi</code> ‚È‚Ç
+     *            ãƒ—ãƒ­ãƒˆã‚³ãƒ« (<code>rmi</code> ãªã©
      * @param handler
-     *            ƒvƒƒgƒRƒ‹‚Ì‚½‚ß‚Ì <code>URLStreamHandler</code>
+     *            ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã® <code>URLStreamHandler</code>
      */
     public static void registerHandler(final String protocol, final URLStreamHandler handler) {
+        initialize();
         registry.put(protocol, handler);
+    }
+
+    /**
+     * 
+     */
+    public static synchronized void initialize() {
+        if (initialized) {
+            return;
+        }
+
+        try {
+            URL.setURLStreamHandlerFactory(new URLStreamHandlerRegistry());
+        }
+        catch (final Throwable e) {
+            logger.log("ERMT0001", null, e);
+        }
+        initialized = true;
     }
 }
