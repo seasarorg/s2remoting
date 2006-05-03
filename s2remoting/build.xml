@@ -1,12 +1,10 @@
 <project name="S2Remoting" default="dist" basedir=".">
-	<property name="ver" value="1.0.0a"/>
+	<property name="ver" value="1.0.1"/>
 
 	<target name="dist">
 		<zip zipfile="target/S2Remoting-${ver}.zip">
 			<zipfileset prefix="s2remoting" dir=".">
 				<exclude name="**/target/**"/>
-				<exclude name=".settings"/>
-				<exclude name=".settings/**"/>
 			</zipfileset>
 			<zipfileset prefix="s2remoting/lib" dir="target">
 				<include name="s2remoting-${ver}.jar"/>
