@@ -79,7 +79,7 @@ public class URLStreamHandlerRegistry implements URLStreamHandlerFactory {
             URL.setURLStreamHandlerFactory(new URLStreamHandlerRegistry());
         }
         catch (final Throwable e) {
-            logger.log("ERMT0001", null, e);
+            logger.log("WRMT0001", null, e);
         }
         initialized = true;
     }
