@@ -25,10 +25,17 @@ import java.util.Map;
 import org.seasar.framework.log.Logger;
 
 /**
- * <code>URLStreamHandler</code> のレジストリです。 <br>
+ * <code>URLStreamHandler</code> のレジストリです。
+ * <p>
  * このレジストリは <code>URLStreamHandlerFactory</code> であり、 <code>URL</code>
  * クラスに設定されます。 {@link #createURLStreamHandler(String)} が呼び出されると、登録されている
  * <code>URLStreamHandler</code> を返します。
+ * </p>
+ * <p>
+ * S2Remoting 1.0.2以前では<code>URLStreamHandler</code>の登録は暗黙的に行われてきましたが、
+ * Tomcat上などこの操作が有効ではない環境もあるため、 明示的に呼び出されるまで<code>URLStreamHandler</code>の登録を行わないようにしました。<br>
+ * S2RMIなど、非標準URLを使用する場合は明示的に{@link registerURLStreamHandlerRegistry}を呼び出してください。
+ * </p>
  * 
  * @author koichik
  */
@@ -36,7 +43,6 @@ public class URLStreamHandlerRegistry implements URLStreamHandlerFactory {
 
     private static final Logger logger = Logger.getLogger(URLStreamHandlerRegistry.class);
     protected static final Map registry = Collections.synchronizedMap(new HashMap());
-    protected static boolean initialized;
 
     /**
      * インスタンスを構築します。
@@ -63,24 +69,22 @@ public class URLStreamHandlerRegistry implements URLStreamHandlerFactory {
      *            プロトコルのための <code>URLStreamHandler</code>
      */
     public static void registerHandler(final String protocol, final URLStreamHandler handler) {
-        initialize();
         registry.put(protocol, handler);
     }
 
     /**
-     * 
+     * URLストリームハンドラを登録します。
+     * <p>
+     * S2Remoting 1.0.2以前ではこの操作は暗黙的に行われてきましたが、 Tomcat上などこの操作が有効ではない環境もあるため、
+     * 明示的に呼び出されるまでURLStreamHandlerの登録を行わないようにしました。
+     * </p>
      */
-    public static synchronized void initialize() {
-        if (initialized) {
-            return;
-        }
-
+    public static synchronized void registerURLStreamHandler() {
         try {
             URL.setURLStreamHandlerFactory(new URLStreamHandlerRegistry());
         }
         catch (final Throwable e) {
             logger.log("WRMT0001", null, e);
         }
-        initialized = true;
     }
 }

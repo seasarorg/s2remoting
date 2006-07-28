@@ -33,6 +33,7 @@ public class UnopenableURLStreamHandlerTest extends TestCase {
     }
 
     public void test() throws MalformedURLException {
+        URLStreamHandlerRegistry.registerURLStreamHandler();
         URLStreamHandlerRegistry.registerHandler("rmi", new UnopenableURLStreamHandler(1099));
 
         URL url = new URL("rmi://localhost/test");
