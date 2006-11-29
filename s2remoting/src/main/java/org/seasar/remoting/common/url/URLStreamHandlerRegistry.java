@@ -41,6 +41,7 @@ import org.seasar.framework.log.Logger;
  */
 public class URLStreamHandlerRegistry implements URLStreamHandlerFactory {
 
+    // class fields
     private static final Logger logger = Logger.getLogger(URLStreamHandlerRegistry.class);
     protected static final Map registry = Collections.synchronizedMap(new HashMap());
 

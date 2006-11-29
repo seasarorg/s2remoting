@@ -31,7 +31,7 @@ import java.util.Map;
  * ベースURLが次のように設定されているとします。
  * 
  * <pre>
- *     http://host/context/services/
+ *      http://host/context/services/
  * </pre>
  * 
  * リモートオブジェクトが次の名前であるとします。
@@ -43,13 +43,13 @@ import java.util.Map;
  * リモートオブジェクトのURLは次のようになります。
  * 
  * <pre>
- *     http://host/context/services/Foo
+ *      http://host/context/services/Foo
  * </pre>
  * 
  * ベースURLが次のようにスラッシュ( <code>/</code> )で終了していない場合は結果が異なります。
  * 
  * <pre>
- *     http://host/context/services
+ *      http://host/context/services
  * </pre>
  * 
  * リモートオブジェクトが次の名前であるとします。
@@ -61,7 +61,7 @@ import java.util.Map;
  * リモートオブジェクトのURLは次のようになります。
  * 
  * <pre>
- *     http://host/context/Foo
+ *      http://host/context/Foo
  * </pre>
  * 
  * @author koichik

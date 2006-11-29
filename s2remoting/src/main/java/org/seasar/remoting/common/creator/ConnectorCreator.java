@@ -15,24 +15,48 @@
  */
 package org.seasar.remoting.common.creator;
 
+import org.seasar.framework.container.ComponentCreator;
 import org.seasar.framework.container.ComponentCustomizer;
 import org.seasar.framework.container.creator.ComponentCreatorImpl;
 import org.seasar.framework.convention.NamingConvention;
+import org.seasar.remoting.common.connector.Connector;
 
+/**
+ * SMART deployにおいて{@link Connector}のコンポーネント定義を作成する{@link ComponentCreator}の実装クラスです。
+ * 
+ * @author koichik
+ */
 public class ConnectorCreator extends ComponentCreatorImpl {
 
-    public ConnectorCreator(NamingConvention namingConvention) {
+    /**
+     * インスタンスを構築します。
+     * 
+     * @param namingConvention
+     *            ネーミングコンベンション
+     */
+    public ConnectorCreator(final NamingConvention namingConvention) {
         super(namingConvention);
         setNameSuffix(namingConvention.getConnectorSuffix());
         setEnableInterface(false);
         setEnableAbstract(false);
     }
 
+    /**
+     * コンポーネントカスタマイザを返します。
+     * 
+     * @return コンポーネントカスタマイザ
+     */
     public ComponentCustomizer getConnectorCustomizer() {
         return getCustomizer();
     }
 
-    public void setConnectorCustomizer(ComponentCustomizer customizer) {
+    /**
+     * コンポーネントカスタマイザを設定します。
+     * 
+     * @param customizer
+     *            コンポーネントカスタマイザ
+     */
+    public void setConnectorCustomizer(final ComponentCustomizer customizer) {
         setCustomizer(customizer);
     }
 
