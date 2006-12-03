@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>ユーザガイド - アーキテクチャ</title>
+	</properties>
+	<body>
+		<section name="アーキテクチャ">
+			<p>
+				S2Remotingは，アプリケーションがRMIやWebサービス (JAX-RPC) などのAPIを意識することなく，
+				リモート呼び出しを行えるような共通基盤を提供します．
+			</p>
+			<p>
+				リモート呼び出しを使わない場合，クライアントアプリケーション (またはコンポーネント) とS2により管理されるコンポーネントは，
+				次のような関係になります (クライアントもS2コンテナで管理される場合があります)．<br />
+				<img src="../images/s2remoting1.png" width="342" height="222" border="0" />
+			</p>
+			<p>
+				S2Remotingを使用すると，次のように分散環境にあるコンポーネントを呼び出すことができるようになります．<br />
+				<img src="../images/s2remoting2.png" width="542" height="320" border="0" />
+			</p>
+			<p>
+				クライアントもコンポーネントも何も変更する必要はありません．
+			</p>
+			<p>
+				S2Remotingはこの図の中の<code>RemotingInterceptor</code>を提供します．
+				また，<code>Connector</code>のインタフェースおよび抽象クラスを提供しますが，実装クラスは提供しません．
+				<code>Connector</code>の実装クラスや<code>Adaptor</code>は
+				<a href="http://s2rmi.seasar.org">S2RMI</a>や
+				<a href="http://s2axis.seasar.org">S2Axis</a>など，プロトコルごとに個別のプロダクトとして提供されます．
+				<code>ComponentInvoker</code>は<a href="http://s2container.seasar.org">Seasar2</a>によって提供されます．
+			</p>
+		</section>
+	</body>
+</document>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>ユーザガイド</title>
+	</properties>
+	<body>
+		<section name="目次">
+			<ul>
+				<li>
+					<p><a href="architecture.html">アーキテクチャ</a></p>
+				</li>
+				<li>
+					<p><a href="interceptor.html">インターセプタ</a></p>
+				</li>
+			</ul>
+		</section>
+	</body>
+</document>

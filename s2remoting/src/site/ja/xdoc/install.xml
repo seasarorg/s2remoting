@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Install</title>
+	</properties>
+	<body>
+		<section name="目次">
+			<ul>
+				<li><p><a href="#ダウンロード">ダウンロード</a></p></li>
+				<li><p><a href="#配布ファイルの内容">配布ファイルの内容</a></p></li>
+				<li><p><a href="#JDKでの利用">JDKでの利用</a></p></li>
+				<li><p><a href="#Eclipseでの利用">Eclipseでの利用</a></p></li>
+				<li><p><a href="#Mavenでの利用">Mavenでの利用</a></p></li>
+			</ul>
+		</section>
+		<section name="ダウンロード">
+			<p>
+				<a href="downloads.html">こちら</a>からS2Remotingの配布ファイルをダウンロードしてください．
+			</p>
+		</section>
+		<section name="配布ファイルの内容">
+			<p>
+				S2Remotingの配布ファイルには以下の内容が含まれています
+			</p>
+			<dl>
+				<dt>
+					<p><code>s2remoting</code></p>
+				</dt>
+				<dd>
+					<p>S2Remoting本体です．</p>
+				</dd>
+			</dl>
+		</section>
+		<section name="JDKの利用">
+			<subsection name="事前条件">
+				<p>
+					事前に以下のプロダクトを利用できるようにしてください．
+				</p>
+				<ul>
+					<li>
+						<p><a href="http://s2container.seasar.org">Seasar2</a></p>
+					</li>
+				</ul>
+				<p>
+					依存するバージョンについては「<a href="dependencies.html">プロジェクトの依存関係</a>」を参照してください．
+				</p>
+			</subsection>
+			<subsection name="クラスパスの設定">
+				<p>
+					ダウンロードしたS2Remotingの配布ファイルを適当なディレクトリに解凍してください．
+					解凍したディレクトリ以下の次のJarファイルをクラスパスに設定してください．
+				</p>
+				<ul>
+					<li>
+						<p><code>s2remoting/lib/s2remoting-<var>x.x.x</var>.jar</code></p>
+					</li>
+				</ul>
+			</subsection>
+		</section>
+		<section name="Eclipseでの利用">
+			<p>
+				S2Remotingの配布ファイルは，他のSeasar2関連プロダクトの多くと同様，
+				Eclipseプロジェクトをアーカイブしたものになっています．
+			</p>
+			<subsection name="事前条件">
+				<p>
+					事前に以下のプロダクトをワークスペースにインポートしてください．
+				</p>
+				<ul>
+					<li>
+						<p><a href="http://s2container.seasar.org">Seasar2</a></p>
+					</li>
+				</ul>
+				<p>
+					依存するバージョンについては「<a href="dependencies.html">プロジェクトの依存関係</a>」を参照してください．
+				</p>
+			</subsection>
+			<subsection name="インポート">
+				<p>
+					以下の手順でS2RemotingをEclipseワークスペースにインポートしてください．
+				</p>
+				<ul>
+					<li>
+						<p>
+							ダウンロードしたS2Remotingの配布ファイルをEclipseのワークスペースまたは適当なディレクトリに解凍してください．
+						</p>
+					</li>
+					<li>
+						<p>
+							Eclipseの「File」－「Import」メニューで「Import Wizard」を開きます．
+						</p>
+					</li>
+					<li>
+						<p>
+							「Select a import source」で「General」－「Existing Project into Workspace」を選択し，
+							「Next」ボタンを押下します．
+						</p>
+					</li>
+					<li>
+						<p>
+							「Select a root directory」でS2Remotingの配布ファイルを解凍したディレクトリを指定します．
+						</p>
+					</li>
+					<li>
+						<p>
+							「Projects」で "s2remoting" がチェックされていることを確認して「Finish」ボタンを押下します．
+						</p>
+					</li>
+				</ul>
+			</subsection>
+			<subsection name="S2Remotingプロジェクトの参照">
+				<p>
+					以下の手順でS2Remotingを利用するJavaプロジェクトからS2Remotingを参照してください．
+				</p>
+				<ul>
+					<li>
+						<p>
+							S2Remotingを利用するJavaプロジェクトを右クリックして「Properties」メニューを選択します．
+						</p>
+					</li>
+					<li>
+						<p>
+							左のペインで「Java Build Path」を，右のペインで「Projects」を選択します．
+						</p>
+					</li>
+					<li>
+						<p>
+							「Add」ボタンを押下し，「Select projects to add:」から "s2remoting" をチェックして「OK」ボタンを押下します．
+						</p>
+					</li>
+					<li>
+						<p>
+							「OK」ボタンを押下します．
+						</p>
+					</li>
+				</ul>
+			</subsection>
+		</section>
+		<section name="Maven2での利用">
+			<p>
+				S2RemotingはMaven2に対応しており，SeasarプロジェクトのMaven2リポジトリにデプロイされています．
+			</p>
+			<subsection name="Maven2リポジトリ">
+				<p>
+					SeasarプロジェクトのMaven2リポジトリの利用方法については
+					「<a href="http://www.seasar.org/wiki/index.php?Maven2RepoRemote">Maven2RepoRemote</a>」を
+					参照してください．
+				</p>
+			</subsection>
+			<subsection name="グループID・成果物ID">
+				<p>
+					S2RemotingのグループID・成果物IDについては「<a href="project-summary.html">プロジェクトサマリ</a>」を
+					参照してください．
+				</p>
+			</subsection>
+			<subsection name="依存関係">
+				<p>
+					S2Remotingの依存関係については「<a href="dependencies.html">プロジェクトの依存関係</a>」を
+					参照してください．
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

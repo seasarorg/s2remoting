@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Top</title>
+	</properties>
+	<body>
+		<section name="Welcome">
+			<p>
+				S2Remotingは，<a href="http://s2container.seasar.org">Seasar2</a>によって管理される
+				コンポーネントをリモートオブジェクトとして公開したり，
+				リモートオブジェクトをコンポーネントとして簡単に利用できるようにするための共通基盤を提供します．
+			</p>
+			<p>
+				S2Remotingは単独で使うものではなく，<a href="http://s2rmi.seasar.org">S2RMI</a>や
+				<a href="http://s2axis.seasar.org">S2Axis</a>などのS2Remotingプロダクトファミリーと
+				組み合わせて使います．
+			</p>
+		</section>
+		<section name="News">
+			<dl>
+				<dt>
+					<p>2006/11/25</p>
+				</dt>
+				<dd>
+					<p>1.1.0 をリリースしました． (<a href="downloads.html">ダウンロード</a>)</p>
+				</dd>
+			</dl>
+		</section>
+	</body>
+</document>

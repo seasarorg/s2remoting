@@ -1,20 +1,37 @@
 <project name="S2Remoting" default="dist" basedir=".">
-	<property name="ver" value="1.1.0-SNAPSHOT"/>
+	<property name="ver" value="1.1.0"/>
+	<property name="releaseDate" value="2006/12/04"/>
 
-	<target name="dist">
-		<zip zipfile="target/S2Remoting-${ver}.zip">
+	<target name="fix-site">
+		<mkdir dir="target/site/en"/>
+		<move todir="target/site/en">
+			<fileset dir="target/site">
+				<exclude name="apidocs/**"/>
+				<exclude name="en/**"/>
+				<exclude name="ja/**"/>
+				<exclude name="index.html.en"/>
+				<exclude name="index.html.ja"/>
+			</fileset>
+		</move>
+		<delete file="target/site/ja/index.html.en"/>
+		<delete file="target/site/ja/index.html.ja"/>
+	</target>
+
+	<target name="dist" depends="fix-site">
+		<mkdir dir="target/site/download/${releaseDate}"/>
+		<zip zipfile="target/site/download/${releaseDate}/S2Remoting-${ver}.zip">
 			<zipfileset prefix="s2remoting" dir=".">
+				<exclude name="**/build/**"/>
 				<exclude name="**/target/**"/>
 			</zipfileset>
 			<zipfileset prefix="s2remoting/lib" dir="target">
-				<include name="s2remoting-${ver}.jar"/>
+				<include name="*.jar"/>
 			</zipfileset>
 			<zipfileset prefix="s2remoting/resources" dir="src/test/resources">
 				<include name="log4j.properties"/>
 			</zipfileset>
-			<zipfileset prefix="s2remoting/doc" dir="../s2remoting-www">
+			<zipfileset prefix="s2remoting/doc" dir="target/site">
 				<exclude name="**/download/**"/>
-				<exclude name=".project"/>
 			</zipfileset>
 		</zip>
 	</target>

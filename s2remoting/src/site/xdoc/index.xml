@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Top</title>
+	</properties>
+	<body>
+		<section name="Welcome">
+			<p>
+				S2Remoting is a common platform to allow components defined in dicon file to be made available as remote objects and it also allows remote objects to be easily accessed as components.
+			</p>
+			<p>
+				S2Remoting is not a standalone software.
+				It is used in combination with S2RMI, S2Axis, and S2Remoting.
+			</p>
+		</section>
+		<section name="News">
+			<dl>
+				<dt>
+					<p>04.12.2006</p>
+				</dt>
+				<dd>
+					<p>S2Remoting-1.1.0 released． (<a href="downloads.html">Download</a>)</p>
+				</dd>
+			</dl>
+		</section>
+	</body>
+</document>

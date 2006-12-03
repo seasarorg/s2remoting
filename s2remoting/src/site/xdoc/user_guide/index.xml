@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>User Guide</title>
+	</properties>
+	<body>
+		<section name="Table of Content">
+			<ul>
+				<li><p><a href="#About">About</a></p></li>
+				<li><p><a href="#Architecture">Architecture</a></p></li>
+				<li><p><a href="#Using an Interceptor">Using an Interceptor</a></p></li>
+			</ul>
+		</section>
+		<section name="About">
+			<p>
+				This is a document for <code>S2Remoting-1.0.1</code>.
+				Documents for older versions of S2Remoting are included in 
+				their respective distribution archive file.<br />
+			</p>
+		</section>
+		<section name="Architecture">
+			<p>
+				S2Remoting is a common platform that enables application to call remotely 
+				without directly calling RMI nor web service (JAX-RPC).
+				When remote call is not used, client application or client component is 
+				related to components managed by S2 as follows 
+				(client may also be managed by S2 container):<br />
+				<img src="../../ja/images/s2remoting1.png" width="342" height="222" border="0" /><br />
+			</p>
+			<p>
+				When S2Remoting is used, distributed components may be called as follows.
+				Client and components does not have to be modified.<br />
+				<img src="../../ja/images/s2remoting2.png" width="542" height="320" border="0" /><br />
+			</p>
+			<p>
+				S2Remoting is the interceptor in the above diagram.
+				S2Remoting also offers connector interfaces and abstract classes, but it does not offer any implementation classes.
+				Connector and adapter implementations are offered by related packages such as S2RMI and S2Axis which offers different protocol implementation.
+			</p>
+		</section>
+		<section name="Using an Interceptor">
+			<p>
+				To call a remote component, use <code>RemotingInterceptor</code> made available by S2Remoting.
+			</p>
+<source>
+&lt;!-- Remote Call Interceptor --&gt;
+&lt;component name="remoting" class="org.seasar.remoting.common.interceptor.RemotingInterceptor"/&gt;
+
+&lt;!-- Component's Proxy (Interface) --&gt;
+&lt;component name="<var>name</var>" class="<var>Component's Interface</var>"&gt;
+    &lt;aspect&gt;remoting&lt;/aspect&gt;
+&lt;/component&gt;
+</source>
+			<p>
+				Component's interface is specified as &lt;component&gt; element's attribute.
+				Value of a name attribute differs by protocol but is commonly remote object location.
+				Refer to software document for the protocol for details on what this value should be set to.<br />
+				Interceptor should be set to a connector.
+				Usually, an interceptor is defined in the same dicon file as a connector so S2 S2 will automatically set it by injection.
+			</p>
+		</section>
+	</body>
+</document>

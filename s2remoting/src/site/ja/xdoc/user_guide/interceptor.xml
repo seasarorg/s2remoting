@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>ユーザガイド - インターセプタ</title>
+	</properties>
+	<body>
+		<section name="インターセプタ">
+			<p>
+				コンポーネントをリモート呼び出しするには，S2Remotingの提供する<code>RemotingInterceptor</code>を使用します．
+			</p>
+<source>
+&lt;!-- リモート呼び出しのインターセプタ --&gt;
+&lt;component name="remoting" class="org.seasar.remoting.common.interceptor.RemotingInterceptor"/&gt;
+
+&lt;!-- コンポーネントのプロキシ (インタフェース) --&gt;
+&lt;component name="<var>名前</var>" class="<var>コンポーネントのインタフェース</var>"&gt;
+    &lt;aspect&gt;remoting&lt;/aspect&gt;
+&lt;/component&gt;
+</source>
+			<p>
+				&lt;component&gt;要素のclass属性には，コンポーネントのインタフェースを指定します．
+				name属性に指定する名前は，プロトコルによってはリモートオブジェクトのロケーションとして使用されます．
+				詳細は実際に使用するプロダクトのドキュメントを参照してください．
+			</p>
+			<p>
+				インターセプタにはコネクタを設定する必要があります．
+				通常はインターセプタと同じdiconファイルにコネクタを定義することで，S2により自動インジェクションで設定されます．
+			</p>
+		</section>
+	</body>
+</document>
