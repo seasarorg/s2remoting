@@ -6,5 +6,5 @@
 	<classpathentry output="target/test-classes" kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="/seasar2"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="build/classes"/>
 </classpath>
