@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package org.seasar.remoting.common.interceptor;
+package org.seasar.remoting.common.customizer;
 
 import org.seasar.framework.container.ComponentCustomizer;
 import org.seasar.framework.container.ComponentDef;
@@ -21,6 +21,7 @@ import org.seasar.framework.container.PropertyDef;
 import org.seasar.framework.container.impl.PropertyDefImpl;
 import org.seasar.framework.container.ognl.OgnlExpression;
 import org.seasar.remoting.common.connector.Connector;
+import org.seasar.remoting.common.interceptor.RemotingInterceptor;
 
 /**
  * SMART deployにおいて{@link RemotingInterceptor}のコンポーネント定義を
@@ -31,7 +32,8 @@ import org.seasar.remoting.common.connector.Connector;
 public class RemotingInterceptorCustomizer implements ComponentCustomizer {
 
     // constants
-    protected static final String REMOTING_INTERCEPTOR_CLASS_NAME = "org.seasar.remoting.common.interceptor.RemotingInterceptor";
+    public static final String REMOTING_INTERCEPTOR_CLASS_NAME = "org.seasar.remoting.common.interceptor.RemotingInterceptor";
+    public static final String connectorName_BINDING = "bindingType=must";
 
     // instance fields
     protected String connectorName;
