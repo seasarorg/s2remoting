@@ -41,6 +41,7 @@
       <item name="FAQ" href="faq.html"/>
       <item name="Install" href="install.html"/>
       <item name="User Guide" href="user_guide/index.html"/>
+      <item name="Examples Guide" href="examples_guide/index.html"/>
       <item name="Javadoc" href="../apidocs/index.html"/>
     </menu>
     ${reports}

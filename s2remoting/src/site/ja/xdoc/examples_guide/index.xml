@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>サンプル解説</title>
+	</properties>
+	<body>
+		<section name="目次">
+			<ul>
+				<li>
+					<p><a href="#S2RMI／S2Axisの切り替え">S2RMI／S2Axisの切り替え</a></p>
+				</li>
+			</ul>
+		</section>
+		<section name="S2RMI／S2Axisの切り替え">
+			<subsection name="概要">
+				<p>
+					diconの設定だけで，S2RMIとS2Axisを切り替えて利用できるサンプルです．
+				</p>
+			</subsection>
+			<subsection name="ダウンロード">
+				<ul>
+					<li>
+						<p><a href="../../download/examples/s2-communication-server.zip">s2-communication-server</a></p>
+					</li>
+					<li>
+						<p><a href="../../download/examples/s2-communication-client.zip">s2-communication-client</a></p>
+					</li>
+				</ul>
+			</subsection>
+			<subsection name="実行方法">
+				<p>
+					ダウンロードしたファイルを解凍し，Eclipseでインポートします．
+				</p>
+				<p>
+					サーバは，Tomcatプロジェクトになっています．
+					コンテキストにサンプルを登録した後，Tomcatを起動すれば，S2RMIとS2Axisのサービスが自動的に立ち上がります．
+				</p>
+				<p>
+					クライアントは，以下のクラスを実行します．
+				</p>
+				<ul>
+					<li>
+						examples.communication.client.HelloClient
+					</li>
+				</ul>
+				<p>
+					デフォルトでは，S2RMIとして起動するようになっていますが，app.diconの設定でincludeするdiconを変更することで，
+					S2RMIとS2Axisを切り替えて実行することが可能です．
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>
+
