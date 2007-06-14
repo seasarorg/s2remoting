@@ -46,8 +46,12 @@ public class RemotingInterceptor extends AbstractInterceptor {
     // constants
     private static final long serialVersionUID = 1L;
 
+    // annotations
+    public static final String connector_BINDING = "bindingType=must";
+
     // instance fields
     protected Connector connector;
+
     protected String remoteName;
 
     /**
