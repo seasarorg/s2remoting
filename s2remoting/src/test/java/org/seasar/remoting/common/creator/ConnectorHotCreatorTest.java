@@ -17,7 +17,6 @@ package org.seasar.remoting.common.creator;
 
 import org.seasar.framework.container.ComponentCreator;
 import org.seasar.framework.container.ComponentDef;
-import org.seasar.framework.container.creator.ConnectorCreator;
 import org.seasar.framework.container.hotdeploy.creator.HotdeployCreatorTestCase;
 import org.seasar.framework.convention.NamingConvention;
 
