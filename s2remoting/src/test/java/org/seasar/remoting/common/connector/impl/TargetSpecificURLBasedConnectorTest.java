@@ -50,9 +50,12 @@ public class TargetSpecificURLBasedConnectorTest extends TestCase {
     }
 
     public void testLRUMap() {
-        TargetSpecificURLBasedConnector.LRUMap map = new TargetSpecificURLBasedConnector.LRUMap(1);
+        TargetSpecificURLBasedConnector.LRUMap map = new TargetSpecificURLBasedConnector.LRUMap(0);
+        assertEquals(0, map.size());
+        map.put("0", "0");
         assertEquals(0, map.size());
 
+        map.setMaxSize(1);
         map.put("1", "1");
         assertEquals(1, map.size());
 
@@ -68,6 +71,6 @@ public class TargetSpecificURLBasedConnectorTest extends TestCase {
 
         map.setMaxSize(0);
         map.put("5", "5");
-        assertEquals(3, map.size());
+        assertEquals(2, map.size());
     }
 }

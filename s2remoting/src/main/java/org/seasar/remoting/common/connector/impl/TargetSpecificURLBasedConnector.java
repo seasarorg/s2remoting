@@ -202,7 +202,7 @@ public abstract class TargetSpecificURLBasedConnector extends URLBasedConnector 
          * @return マップのエントリ数が最大数を超えている場合 <code>true</code>
          */
         protected boolean removeEldestEntry(final Map.Entry eldest) {
-            return maxSize > 0 && size() > maxSize;
+            return maxSize == 0 || size() > maxSize;
         }
     }
 }
