@@ -1,0 +1,15 @@
+ ------
+S2Remoting Changelog
+ ------
+ ------
+ ------
+
+
+
+Version {1.1.1} (2007/10/09)
+
+* 変更点
+
+** Improvement
+
+    * [{{{https://www.seasar.org/issues/browse/REMOTING-2}REMOTING-2}}] - maxCachedURLs に 0 を設定することで，URL のキャッシュを無効にできるようにしました．
