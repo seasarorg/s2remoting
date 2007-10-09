@@ -34,7 +34,7 @@ import org.seasar.framework.log.Logger;
  * <p>
  * S2Remoting 1.0.2以前では<code>URLStreamHandler</code>の登録は暗黙的に行われてきましたが、
  * Tomcat上などこの操作が有効ではない環境もあるため、 明示的に呼び出されるまで<code>URLStreamHandler</code>の登録を行わないようにしました。<br>
- * S2RMIなど、非標準URLを使用する場合は明示的に{@link registerURLStreamHandlerRegistry}を呼び出してください。
+ * S2RMIなど、非標準URLを使用する場合は明示的に{@link #registerURLStreamHandler()}を呼び出してください。
  * </p>
  * 
  * @author koichik
