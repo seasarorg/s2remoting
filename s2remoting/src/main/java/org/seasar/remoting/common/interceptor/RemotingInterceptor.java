@@ -27,8 +27,8 @@ import org.seasar.remoting.common.connector.Connector;
 /**
  * リモートオブジェクトのメソッド呼び出しを行うためのインターセプタです。
  * <p>
- * このインターセプタはJavaインタフェースまたは抽象クラスに適用され、呼び出されたメソッドがターゲットによって実装されていない場合(抽象メソッド)に
- * {@link Connector}に委譲することによりリモートオブジェクトのメソッド呼び出しを行います。
+ * このインターセプタはJavaインタフェースまたは抽象クラスに適用され、 呼び出されたメソッドがターゲットによって実装されていない場合(抽象メソッド)か、
+ * <code>forceRemote</code>がtrueの場合に {@link Connector}に委譲することによりリモートオブジェクトのメソッド呼び出しを行います。
  * <p>
  * インターセプタはターゲットのコンポーネント定義から名前( <code>&lt;component&gt;</code> 要素の
  * <code>name</code> 属性の値)を取得し、その名前をリモートオブジェクトの名前として {@link Connector#invoke}
@@ -54,6 +54,8 @@ public class RemotingInterceptor extends AbstractInterceptor {
 
     protected String remoteName;
 
+    protected boolean forceRemote = false;
+
     /**
      * リモート呼び出しを実行する {@link Connector}を設定します。このプロパティは必須です。
      * 
@@ -76,15 +78,15 @@ public class RemotingInterceptor extends AbstractInterceptor {
     }
 
     /**
-     * ターゲットのメソッドが起動された時に呼び出されます。起動されたメソッドが抽象メソッドなら {@link Connector}に委譲します。
-     * 具象メソッドならターゲットのメソッドを呼び出します。
+     * ターゲットのメソッドが起動された時に呼び出されます。 起動されたメソッドが抽象メソッドか、 <code>forceRemote</code>がtrueならば、
+     * 処理を {@link Connector}に委譲します。 そうでない場合は、ターゲットの具象メソッドを呼び出します。
      * 
      * @param invocation
      *            メソッドの起動情報
      */
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Method method = invocation.getMethod();
-        if (MethodUtil.isAbstract(method)) {
+        if (MethodUtil.isAbstract(method) || forceRemote) {
             return connector.invoke(getRemoteName(invocation), method, invocation.getArguments());
         }
         return invocation.proceed();
@@ -120,5 +122,26 @@ public class RemotingInterceptor extends AbstractInterceptor {
         }
 
         return ClassUtil.getShortClassName(invocation.getThis().getClass());
+    }
+
+    /**
+     * このオブジェクトが、強制的にリモート呼び出しを行うかどうかの設定を返します。
+     * 
+     * @return 強制的にリモート呼び出しを行うかどうかの指定
+     */
+    public boolean isForceRemote() {
+        return forceRemote;
+    }
+
+    /**
+     * 呼び出されるメソッドが抽象メソッドでない場合も、 リモート呼び出しを行うかどうかを設定します。
+     * trueの場合は必ずリモート呼び出し、falseの場合は抽象メソッドの場合のみ、 リモート呼び出しを行うようになります。
+     * デフォルトはfalseです。
+     * 
+     * @param forceRemote
+     *            強制的にリモート呼び出しを行うかどうかの指定
+     */
+    public void setForceRemote(boolean forceRemote) {
+        this.forceRemote = forceRemote;
     }
 }

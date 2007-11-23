@@ -25,6 +25,8 @@ public class RemotingInterceptorTest extends S2TestCase {
 
     private MockInterceptor mockInterceptor;
 
+    private RemotingInterceptor remotingInterceptor;
+
     public RemotingInterceptorTest() {
     }
 
@@ -44,6 +46,14 @@ public class RemotingInterceptorTest extends S2TestCase {
 
         // call abstract method
         hoge.bar();
+        assertTrue(mockInterceptor.isInvoked("invoke"));
+    }
+
+    public void testInvoke_forceRemote() {
+        remotingInterceptor.setForceRemote(true);
+
+        Hoge hoge = (Hoge) getComponent(Hoge.class);
+        hoge.foo();
         assertTrue(mockInterceptor.isInvoked("invoke"));
     }
 
