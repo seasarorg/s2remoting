@@ -4,7 +4,13 @@ S2Remoting Changelog
  ------
  ------
 
+Version {1.1.2} (2007/11/24)
 
+* 変更点
+
+** Improvement
+
+    * [{{{https://www.seasar.org/issues/browse/REMOTING-3}REMOTING-3}}] - 具象メソッドの場合もリモート呼び出しを行えるようにする
 
 Version {1.1.1} (2007/10/09)
 
