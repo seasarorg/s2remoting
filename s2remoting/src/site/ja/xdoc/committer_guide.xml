@@ -32,29 +32,23 @@
 
 		<section name="リリース手順">
 			<dl>
-				<dt>S2Remotingのビルド～デプロイ</dt>
+				<dt>ビルド</dt>
 				<dd>
 <source>
 <kbd>cd s2remoting</kbd>
-<kbd>mvn clean deploy</kbd>
+<kbd>mvn clean install</kbd>
 </source>
 				</dd>
-				<dt>サイトの作成</dt>
+				<dt>デプロイ</dt>
 				<dd>
 <source>
-<kbd>mvn site</kbd>
+<kbd>mvn deploy -Dmaven.test.skip=true</kbd>
 </source>
 				</dd>
-				<dt>配布ファイルの作成</dt>
+				<dt>サイトデプロイ</dt>
 				<dd>
 <source>
-<kbd>ant</kbd>
-</source>
-				</dd>
-				<dt>サイトのデプロイ</dt>
-				<dd>
-<source>
-<kbd>mvn site:deploy</kbd>
+<kbd>mvn site-deploy</kbd>
 </source>
 				</dd>
 			</dl>
